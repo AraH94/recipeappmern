@@ -3,6 +3,7 @@ import cors from 'cors'; // allows you to set up the rules between the communica
 import mongoose from 'mongoose'; // database connection (mongodb) (library)
 
 import {userRouter} from './routes/users.js';
+import {recipesRouter} from './routes/recipes.js';
 
 const app = express();
 
@@ -10,7 +11,8 @@ app.use(express.json()); // when you get data from the front-end it will convert
 app.use(cors());
 
 app.use("/auth", userRouter);
+app.use("/recipes", recipesRouter);
 
 mongoose.connect("mongodb+srv://arahoedemakers:MERN123@recipes.9vnizkv.mongodb.net/recipes?retryWrites=true&w=majority");
 
-app.listen(3002, () => console.log("SERVER STARTED!")); // tells our API to start listening on port 3002
+app.listen(3002, () => console.log("SERVER STARTED!")); // tells our API to start listening on port 3000
