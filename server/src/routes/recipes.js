@@ -25,7 +25,6 @@ router.post("/", async (req, res) => { // here we create a new recipe
 });
 
 router.put("/", async (req, res) => { // here we want to save recipes
-
 	try {
 		// { userId, recipeId } // userId: to find which user we want to change their saved recipes field, recipeId: to insert into that array
 		const recipe = await RecipeModel.findById(req.body.recipeId)
@@ -41,7 +40,7 @@ router.put("/", async (req, res) => { // here we want to save recipes
 router.get("/savedRecipes/ids", async (req, res) => { // a list of all the recipeID's that the user, who's logged into at the moment, has saved
 	try {
 		const user = await UserModel.findById(req.body.userID)
-		res.json({savedRecipes: user?.savedRecipes}); // put a ? since the request might be No
+		res.json({ savedRecipes: user?.savedRecipes }); // put a ? since the request might be No
 	} catch (err) {
 		res.json(err);
 	}
@@ -51,9 +50,9 @@ router.get("/savedRecipes", async (req, res) => { // route to get the saved reci
 	try {
 		const user = await UserModel.findById(req.body.userID); // try to get a user
 		const savedRecipes = await RecipeModel.find({ // going to find, we're going to query, for saved recipes. When we try to find them, we try to find them by ID
-			_id: {$in: user.savedRecipes} // array of recipe ID's. We want to grab the savedRecipes where their _id is inside if this (see code 54) list
+			_id: { $in: user.savedRecipes } // array of recipe ID's. We want to grab the savedRecipes where their _id is inside if this (see code 54) list
 		});
-		res.json({savedRecipes}); 
+		res.json({ savedRecipes });
 	} catch (err) {
 		res.json(err);
 	}
